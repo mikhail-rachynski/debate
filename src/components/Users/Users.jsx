@@ -1,7 +1,7 @@
 import React from 'react'
 import {usersAPI} from "../../api/api";
 
-const User = () => {
+const Users = () => {
     usersAPI.getUsers().then(data => {
         return data
     })
@@ -10,4 +10,4 @@ const User = () => {
     </div>)
 }
 
-export default User
+export default Users

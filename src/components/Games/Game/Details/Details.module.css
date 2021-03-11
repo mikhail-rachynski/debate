@@ -1,0 +1,42 @@
+.details {
+    background-color: #f8f6f6;
+    color: dimgrey;
+    margin-top: -12px;
+    margin-bottom: 12px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.2);
+    display: grid;
+    grid-template-areas:
+    "topic status users option";
+    grid-template-columns: 1fr 1fr 1fr auto;
+    grid-template-rows: minmax(48px, auto);
+    align-items: center;
+}
+.details a {
+    color: dimgrey;
+}
+.topic {
+    grid-area: topic;
+}
+.users {
+    padding: 10px;
+    grid-area: users;
+    font-size: small;
+}
+.status {
+    grid-area: status;
+}
+.option {
+    grid-area: option;
+    z-index: 101;
+}
+.topic, .users, .status, .option {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.users, .status, .option {
+    text-align: center;
+}

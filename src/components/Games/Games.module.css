@@ -1,0 +1,14 @@
+.games {
+    display: grid;
+    grid-template-areas:
+    "start"
+    "games";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+}
+.start {
+    grid-area: start;
+}
+.games {
+    grid-area: games;
+}

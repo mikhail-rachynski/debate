@@ -1,0 +1,40 @@
+.game {
+    background-color: #f1f1f1;
+    margin-bottom: 12px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+    display: grid;
+    grid-template-areas:
+    "topic users status option";
+    grid-template-columns: 1fr auto 0.2fr auto;
+    grid-template-rows: 48px;
+    align-items: center;
+    position: relative;
+    z-index: 100;
+    cursor: pointer;
+}
+.game a {
+    color: black;
+    text-decoration: none;
+}
+.topic {
+    grid-area: topic;
+
+}
+.users {
+    grid-area: users;
+}
+.status {
+    grid-area: status;
+}
+.option {
+    grid-area: option;
+
+}
+.topic, .users, .status, .option {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.users, .status, .option {
+    text-align: center;
+}

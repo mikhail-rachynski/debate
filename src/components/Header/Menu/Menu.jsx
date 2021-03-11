@@ -14,7 +14,9 @@ const Menu = (props) => {
                              onClick={() => {props.onMenuClicked()}} >{item.name}</NavLink>)}
 
             </div>
-        </div><div className="close" onClick={() => {props.onMenuClicked()}}></div></div>
+        </div>
+            <div className="close" onClick={() => {props.onMenuClicked()}}></div>
+        </div>
     )
 }
 
