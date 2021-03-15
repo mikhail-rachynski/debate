@@ -29,7 +29,7 @@
 }
 .option {
     grid-area: option;
-
+    z-index: 1000;
 }
 .topic, .users, .status, .option {
     margin-left: 10px;
