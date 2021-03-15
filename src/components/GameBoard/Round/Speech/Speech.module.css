@@ -1,0 +1,17 @@
+.speech {
+    display: grid;
+    grid-template-areas:
+    "messages"
+    "form";
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+}
+
+.messages {
+    grid-area: messages;
+}
+
+.form {
+    grid-area: form;
+    align-content: end;
+}

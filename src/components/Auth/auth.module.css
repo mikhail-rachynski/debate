@@ -6,7 +6,6 @@
     grid-gap: 10px;
     grid-auto-rows: 200px;
     grid-template-columns: repeat(4, 1fr);
-
 }
 
 .form {
@@ -22,7 +21,7 @@
     text-align: center;
     margin: 0px;
     margin-bottom: 10px;
- }
+}
 .input {
     grid-area: input;
 }

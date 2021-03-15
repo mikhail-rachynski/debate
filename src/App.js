@@ -17,7 +17,7 @@ function App() {
 
             <div className="content">
                 <Route exact path='/' render={() => <GamesContainer /> } />
-                <Route path='/game' render={() => <GameBoardContainer /> } />
+                <Route path='/game/:id' render={() => <GameBoardContainer /> } />
                 <Route path='/login' render={() => <Login /> } />
                 <Route path='/signup' render={() => <SignUp /> } />
                 <Route path='/signout' render={() => <Signout /> } />

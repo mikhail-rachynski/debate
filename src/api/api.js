@@ -1,15 +1,19 @@
 import * as axios from "axios";
+
 let token = localStorage.token
+
+const URL = 'http://192.168.1.50:5000/api/v1/'
+
 const instance = axios.create({
     // withCredentials: true,
-    baseURL: 'http://192.168.3.44:5000/api/v1/',
+    baseURL: URL,
     headers: {
         'Authorization' : `Bearer ${token}`
     }
 })
 
 const NonAuthInstance = axios.create({
-    baseURL: 'http://192.168.3.44:5000/api/v1/',
+    baseURL: URL,
 })
 
 
@@ -38,7 +42,28 @@ export const gamesAPI = {
             .then(response => {
                 return response.data
             })
-    }
+    },
+    get_rounds(gameId)
+    {
+        return instance.get(`games/${gameId}/get_rounds`)
+            .then(response => {
+                return response.data
+            })
+    },
+    push_speech(gameId, round, text)
+    {
+        return instance.post(`games/${gameId}/push_speech`, {round: round, text: text})
+            .then(response => {
+                return response.data
+            })
+    },
+    get_speech(gameId, round)
+    {
+        return instance.get(`games/${gameId}/get_speech?round=${round}`)
+            .then(response => {
+                return response.data
+            })
+    },
 }
 
 export const authAPI = {

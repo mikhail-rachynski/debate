@@ -1,8 +1,9 @@
-.status {
-    width: auto;
-    height: 60px;
-    border-radius: 10px;
+.round {
+
+}
+.roundItem {
     background-color: #f1f1f1;
+    border-radius: 10px;
     box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
     padding: 10px;
 }

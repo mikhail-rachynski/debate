@@ -3,10 +3,11 @@ import {connect} from "react-redux";
 import {addPlayer, getAllGames} from "../../redux/game-reducer";
 import Games from "./Games";
 
-class  GamesContainer extends React.Component{
+class GamesContainer extends React.Component{
     componentDidMount() {
         this.props.getAllGames()
     }
+
     render() {
         return <Games games={this.props.games} userId={this.props.userId} addPlayer={this.props.addPlayer}/>
     }
