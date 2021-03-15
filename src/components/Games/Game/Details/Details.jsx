@@ -13,7 +13,8 @@ const Details = (props) => {
                 : "Waiting for players"}
         </div>
         <span className={style.status}>{props.status}</span>
-        <NavLink to="/game"><button disabled={props.status !== "finished"} className={style.option}>Details</button></NavLink>
+        <NavLink to={"/game/" + props.gameId}><button className={style.option}>Enter to game</button></NavLink>
+        {/*<NavLink to="/game"><button disabled={props.status !== "finished"} className={style.option}>Details</button></NavLink>*/}
     </div>)
 }
 
