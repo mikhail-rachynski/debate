@@ -14,7 +14,14 @@ const Header = (props) => {
             <div className={style.userName}>{props.name}</div>
             {props.isAuth
                 ? <div className={style.headerMenu}><MenuContainer /></div>
-                : <div className={style.loginMenu}>{props.isFetching ? <Preloader /> : <><NavLink to="/signup" >Registration</NavLink><NavLink to="/login" >login</NavLink></>}</div>
+                : <div className={style.loginMenu}>
+                    {
+                        props.isFetching ? <Preloader />
+                            : <>
+                                <NavLink to="/signup" >Registration</NavLink>
+                                <NavLink to="/login" >login</NavLink></>
+                    }
+                </div>
             }
         </div>
     )

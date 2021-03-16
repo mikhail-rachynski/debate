@@ -45,7 +45,7 @@ export const gamesAPI = {
     },
     get_rounds(gameId)
     {
-        return instance.get(`games/${gameId}/get_rounds`)
+        return NonAuthInstance.get(`games/${gameId}/get_rounds`)
             .then(response => {
                 return response.data
             })
@@ -59,7 +59,7 @@ export const gamesAPI = {
     },
     get_speech(gameId, round)
     {
-        return instance.get(`games/${gameId}/get_speech?round=${round}`)
+        return NonAuthInstance.get(`games/${gameId}/get_speech?round=${round}`)
             .then(response => {
                 return response.data
             })

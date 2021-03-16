@@ -14,11 +14,11 @@ const LoginForm = (props) => {
                     <Field placeholder={"Login"} name={"email"} component={"input"}/>
                 </div>
                 <div className={style.input}>
-                    <Field placeholder={"Password"} name={"password"} component={"input"}/>
+                    <Field placeholder={"Password"} type={"password"} name={"password"} component={"input"}/>
                 </div>
-                <div className={style.input}>
-                    <Field type={"checkbox"} name={"rememberMe"} component={"input"}/> Remember me
-                </div>
+                {/*<div className={style.input}>*/}
+                {/*    <Field type={"checkbox"} name={"rememberMe"} component={"input"}/> Remember me*/}
+                {/*</div>*/}
                 <div className={style.input}>
                     <button>Login</button>
                 </div>

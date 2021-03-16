@@ -9,7 +9,9 @@ class GamesContainer extends React.Component{
     }
 
     render() {
-        return <Games games={this.props.games} userId={this.props.userId} addPlayer={this.props.addPlayer}/>
+        return <Games games={this.props.games}
+                      userId={this.props.userId}
+                      addPlayer={this.props.addPlayer}/>
     }
 }
 

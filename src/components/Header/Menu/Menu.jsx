@@ -1,5 +1,4 @@
 import "./Menu.css";
-
 import React from "react";
 import {NavLink} from "react-router-dom";
 
@@ -11,11 +10,12 @@ const Menu = (props) => {
                 {props.items.map(item =>
                     <NavLink to={item.url}
                              key={item.id}
-                             onClick={() => {props.onMenuClicked()}} >{item.name}</NavLink>)}
+                             onClick={() => {props.onMenuClicked()}}>{item.name}
+                    </NavLink>)}
 
             </div>
         </div>
-            <div className="close" onClick={() => {props.onMenuClicked()}}></div>
+            <div className="close" onClick={() => {props.onMenuClicked()}}/>
         </div>
     )
 }

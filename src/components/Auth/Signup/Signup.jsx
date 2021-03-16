@@ -11,16 +11,26 @@ const SignUpForm = (props) => {
         <div className={style.form}><h1>Registration</h1>
             <form onSubmit={props.handleSubmit}>
                 <div className={style.input}>
-                    <Field placeholder={"Name"} name={"name"} component={"input"}/>
+                    <Field placeholder={"Name"}
+                           name={"name"}
+                           component={"input"}/>
                 </div>
                 <div className={style.input}>
-                    <Field placeholder={"Email"} name={"email"} component={"input"}/>
+                    <Field placeholder={"Email"}
+                           name={"email"}
+                           component={"input"}/>
                 </div>
                 <div className={style.input}>
-                    <Field placeholder={"Password"} type={"password"} name={"password"} component={"input"}/>
+                    <Field placeholder={"Password"}
+                           type={"password"}
+                           name={"password"}
+                           component={"input"}/>
                 </div>
                 {/*<div>*/}
-                {/*    <Field placeholder={"Password confirmation"} type={"password"} name={"password_confirmation"} component={"input"}/>*/}
+                {/*    <Field placeholder={"Password confirmation"} */}
+                {/*           type={"password"} */}
+                {/*           name={"password_confirmation"} */}
+                {/*           component={"input"}/>*/}
                 {/*</div>*/}
                 <div className={style.input}>
                     <button>SignUp</button>

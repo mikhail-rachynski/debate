@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from "react-redux";
-import {getRounds, getSpeech} from "../../../redux/game-reducer";
+import {pushSpeech} from "../../../redux/game-reducer";
 import Round from "./Round";
 
 class RoundContainer extends React.Component {
@@ -10,6 +10,7 @@ class RoundContainer extends React.Component {
             <Round key={round.id}
                    roundId={round.id}
                    roundType={round.round_type}
+                   {...this.props}
                    />)}
         </div>
     }
@@ -17,8 +18,11 @@ class RoundContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        speech: state.games.speech,
         rounds: state.games.rounds,
+        currentGame: state.games.currentGame,
+        isAuth: state.auth.isAuth
     }
 }
 
-export default connect(mapStateToProps, {})(RoundContainer)
+export default connect(mapStateToProps, {pushSpeech})(RoundContainer)

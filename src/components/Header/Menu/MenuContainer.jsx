@@ -19,10 +19,14 @@ class MenuContainer extends React.Component {
     }
     render() {
         return <>
-
-            {this.props.menuState ? <Menu items={this.props.items} onMenuClicked={this.onMenuClicked}/> : null}
-            <img src={profilePhoto} alt={"User menu"} className="dropimg" onClick={() => { this.onMenuClicked() }}/>
-
+            {this.props.menuState
+                ? <Menu items={this.props.items}
+                        onMenuClicked={this.onMenuClicked}/>
+                : null}
+            <img src={profilePhoto}
+                 alt={"User menu"}
+                 className="dropimg"
+                 onClick={() => { this.onMenuClicked() }}/>
         </>
     }
 }
