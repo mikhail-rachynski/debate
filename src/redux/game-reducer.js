@@ -66,13 +66,17 @@ export const getAllGames = () => (dispatch) => {
 export const newGame = (topic) => (dispatch) => {
     gamesAPI.newGame(topic)
         .then(data => {
-            dispatch(getAllGames())
+            if(!data.error) {
+                dispatch(getAllGames())
+            }
         })
 }
 export const updateGameTopic = (gameId, topic) => (dispatch) => {
     gamesAPI.updateGameTopic(gameId, topic)
         .then(data => {
-            dispatch(getAllGames())
+            if(!data.error) {
+                dispatch(getAllGames())
+            }
         })
 }
 export const addPlayer = (gameId, userId) => (dispatch) => {
