@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from "react-redux";
-import {addPlayer, getAllGames} from "../../redux/game-reducer";
+import {addPlayer, deleteGame, exitPlayerFromGame, getAllGames, updateGameTopic} from "../../redux/game-reducer";
 import Games from "./Games";
 
 class GamesContainer extends React.Component{
@@ -9,17 +9,22 @@ class GamesContainer extends React.Component{
     }
 
     render() {
-        return <Games games={this.props.games}
-                      userId={this.props.userId}
-                      addPlayer={this.props.addPlayer}/>
+        return <Games {...this.props}/>
     }
 }
 
 let mapStateToProps = (state) => {
     return {
         games: state.games.allGames,
-        userId: state.auth.userId
+        currentUserId: state.auth.currentUserId,
+        isAuth: state.auth.isAuth
     }
 }
 
-export default connect(mapStateToProps, {getAllGames, addPlayer})(GamesContainer)
+export default connect(mapStateToProps, {
+    getAllGames,
+    addPlayer,
+    exitPlayerFromGame,
+    deleteGame,
+    updateGameTopic,
+})(GamesContainer)

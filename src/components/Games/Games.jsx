@@ -7,8 +7,7 @@ import style from './Games.module.css'
 const Games = (props) => {
     let postsElements =
         props.games.map((value) => <Game key={value.id} game={value}
-                                         userId={props.userId}
-                                         addPlayer={props.addPlayer}/>)
+                                         {...props}/>)
     return (
         <div className={style.games}>
             <div className={style.start}><GameMenu /></div>
