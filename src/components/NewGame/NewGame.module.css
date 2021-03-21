@@ -1,0 +1,38 @@
+.formBody {
+    display: grid;
+    grid-template-areas:
+    ". form form ."
+    ". form form .";
+    grid-gap: 10px;
+    grid-auto-rows: 200px;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.form {
+    grid-area: form;
+    align-self: center;
+    justify-self: center;
+    background-color: #f1f1f1;;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.form h1 {
+    text-align: center;
+    margin: 0;
+    margin-bottom: 10px;
+}
+.input {
+    grid-area: input;
+}
+
+.input input{
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: #dddddd 1px solid;
+}
+
+.input button {
+    margin: 10px;
+}
