@@ -1,7 +1,28 @@
-.message {
+.speech {
     font-size: medium;
     width: auto;
     background-color: #f1f1f1;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     padding: 10px;
+    display: grid;
+    grid-template-areas:
+    "user text options";
+    grid-template-columns: 40px auto 40px;
+    grid-template-rows: auto;
+    grid-column-gap: 15px;
+}
+
+.user {
+    grid-area: user;
+    height: 40px;
+    width: 40px;
+}
+.text {
+    grid-area: text;
+    text-align: justify;
+}
+.options {
+    padding: 10px;
+    grid-area: options;
+    justify-self: center;
 }

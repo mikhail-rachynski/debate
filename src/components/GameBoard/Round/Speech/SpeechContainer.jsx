@@ -1,16 +1,16 @@
 import React from "react";
 import {connect} from "react-redux";
 import Speech from "./Speech";
+import {deleteSpeech, updateSpeech} from "../../../../redux/game-reducer";
 
 class SpeechContainer extends React.Component {
-    componentDidMount() {
-    }
-
     render() {
         return <div>
             {this.props.speech[this.props.roundType].map(speech => {
-
-                return <Speech key={speech.id} msg={speech.speech}/>
+                return <div key={speech.id}>
+                    <Speech {...this.props}
+                            {...speech}/>
+                </div>
             })
             }
         </div>
@@ -19,8 +19,10 @@ class SpeechContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        speech: state.games.speech
+        speech: state.games.speech,
+        currentUserId: state.auth.currentUserId,
+        currentGame: state.games.currentGame
     }
 }
 
-export default connect(mapStateToProps, {})(SpeechContainer)
+export default connect(mapStateToProps, {deleteSpeech, updateSpeech})(SpeechContainer)
