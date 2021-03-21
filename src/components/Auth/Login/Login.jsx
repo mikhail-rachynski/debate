@@ -1,10 +1,8 @@
 import React from 'react'
 import {Field, reduxForm} from "redux-form";
 import {authMe, login} from "../../../redux/auth-reducer";
-import {connect} from "react-redux";
-import {compose} from "redux";
-import {withAutoRedirect} from "../../../hoc/withAutoRedirect";
-import style from "./../auth.module.css"
+import {connect} from "react-redux";import style from "./../auth.module.css"
+import {Redirect} from "react-router-dom";
 
 const LoginForm = (props) => {
     return (
@@ -38,9 +36,16 @@ const Login = (props) => {
     const onSubmit =(formData) => {
         props.login(formData)
     }
+    if (props.isAuth) {
+        return <Redirect to={"/"}/>
+    }
     return <div className={style.formBody}>
         <LoginReduxForm onSubmit={onSubmit}/>
     </div>
 }
-
-export default compose(connect(null, {login, authMe}), withAutoRedirect)(Login)
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.auth.isAuth
+    }
+}
+export default connect(mapStateToProps, {login, authMe})(Login)
