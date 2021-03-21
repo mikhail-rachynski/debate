@@ -7,33 +7,36 @@
     margin-right: 10px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2);
     display: grid;
     grid-template-areas:
-    "topic status users option";
-    grid-template-columns: 1fr 1fr 1fr auto;
+    "option status users";
+    grid-template-columns: auto 1fr 2fr;
     grid-template-rows: minmax(48px, auto);
     align-items: center;
 }
 .details a {
     color: dimgrey;
+    text-decoration: none;
 }
-.topic {
-    grid-area: topic;
+.option {
+    grid-area: option;
+    z-index: 101;
+    cursor: pointer;
+}
+.status {
+    grid-area: status;
+    font-size: small;
 }
 .users {
     padding: 10px;
     grid-area: users;
     font-size: small;
 }
-.status {
-    grid-area: status;
+.users a:hover {
+    background-color: #dddddd;
 }
-.option {
-    grid-area: option;
-    z-index: 101;
-}
-.topic, .users, .status, .option {
+.users, .status, .option {
     margin-left: 10px;
     margin-right: 10px;
 }
