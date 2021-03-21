@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 
 class HeaderContainer extends React.Component {
     componentDidMount() {
-        this.props.authMe(this.props.userId)
+        this.props.authMe(this.props.currentUserId)
     }
     render() {
         return <Header {...this.props}/>
@@ -14,7 +14,7 @@ class HeaderContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        userId: state.auth.userId,
+        currentUserId: state.auth.currentUserId,
         name: state.auth.name,
         isAuth: state.auth.isAuth,
         isFetching: state.auth.isFetching
