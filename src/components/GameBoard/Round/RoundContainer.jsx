@@ -21,7 +21,8 @@ const mapStateToProps = (state) => {
         speech: state.games.speech,
         rounds: state.games.rounds,
         currentGame: state.games.currentGame,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        currentUserId: state.auth.currentUserId
     }
 }
 

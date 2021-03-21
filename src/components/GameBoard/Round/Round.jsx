@@ -18,11 +18,7 @@ class Round extends React.Component {
             <div className={style.form}>
                 {this.props.isAuth && <button onClick={this.changeEditMode}>Add speech</button>}
                 {this.state.editMode &&
-                <Talk gameId={this.props.currentGame}
-                      changeEditMode={this.changeEditMode}
-                      roundId={this.props.roundId}
-                      getSpeech={this.props.getSpeech}
-                      pushSpeech={this.props.pushSpeech}/>
+                <Talk {...this.props} changeEditMode={this.changeEditMode} />
                 }</div>
 
         </div>
