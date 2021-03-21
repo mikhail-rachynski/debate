@@ -1,14 +1,12 @@
 import * as axios from "axios";
 
-let token = localStorage.token
-
 const URL = 'http://192.168.1.50:5000/api/v1/'
 
 const instance = axios.create({
     // withCredentials: true,
     baseURL: URL,
     headers: {
-        'Authorization' : `Bearer ${token}`
+        'Authorization' : `Bearer ${localStorage.token}`
     }
 })
 
@@ -24,14 +22,41 @@ export const usersAPI = {
             .then(response => {
                 return response.data
             })
+    },
+    getProfile(userId)
+    {
+        return NonAuthInstance.get(`users/${userId}`)
+            .then(response => {
+                return response.data
+            })
     }
-
 }
 
 export const gamesAPI = {
     getGames()
     {
         return NonAuthInstance.get(`games`)
+            .then(response => {
+                return response.data
+            })
+    },
+    newGame(topic)
+    {
+        return instance.post(`games`, topic)
+            .then(response => {
+                return response.data
+            })
+    },
+    deleteGame(gameId)
+    {
+        return instance.delete(`games/` + gameId)
+            .then(response => {
+                return response.data
+            })
+    },
+    updateGameTopic(gameId, topic)
+    {
+        return instance.put(`games/` + gameId, {topic: topic})
             .then(response => {
                 return response.data
             })
@@ -43,23 +68,48 @@ export const gamesAPI = {
                 return response.data
             })
     },
-    get_rounds(gameId)
+    deletePlayer(gameId, userId)
+    {
+        return instance.delete(`games/${gameId}/delete_player`, {data: {user_id: userId}})
+            .then(response => {
+                return response.data
+            })
+    },
+    getRounds(gameId)
     {
         return NonAuthInstance.get(`games/${gameId}/get_rounds`)
             .then(response => {
                 return response.data
             })
     },
-    push_speech(gameId, round, text)
+
+}
+
+export const speechAPI = {
+    pushSpeech(round, speech)
     {
-        return instance.post(`games/${gameId}/push_speech`, {round: round, text: text})
+        return instance.post(`speeches/`, {round: round, speech: speech})
             .then(response => {
                 return response.data
             })
     },
-    get_speech(gameId, round)
+    getSpeeches(gameId, round)
     {
-        return NonAuthInstance.get(`games/${gameId}/get_speech?round=${round}`)
+        return NonAuthInstance.get(`speeches?round=${round}`)
+            .then(response => {
+                return response.data
+            })
+    },
+    deleteSpeech(speechId)
+    {
+        return instance.delete('speeches/' + speechId)
+            .then(response => {
+                return response.data
+            })
+    },
+    updateSpeech(speechId, speech)
+    {
+        return instance.put('speeches/' + speechId, {speech: speech})
             .then(response => {
                 return response.data
             })
