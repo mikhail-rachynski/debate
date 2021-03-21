@@ -1,26 +1,29 @@
 import React from 'react'
 import {connect} from "react-redux"
-import {setMenuState} from "../../../redux/menu-reducer";
 import Menu from "./Menu";
 import profilePhoto from "../../../assets/images/small_profile_photo.jpg";
+import {signOut} from "../../../redux/auth-reducer";
 
 
 class MenuContainer extends React.Component {
-    componentDidMount() {
-        this.props.setMenuState(false)
+    state = {
+        menuOpened: false
     }
     onMenuClicked = () => {
-        if (this.props.menuState === true) {
-            this.props.setMenuState(false)
+        if (this.state.menuOpened === true) {
+            this.setState({
+                menuOpened: false
+            })
         } else {
-            this.props.setMenuState(true)
+            this.setState({
+                menuOpened: true
+            })
         }
-
     }
     render() {
         return <>
-            {this.props.menuState
-                ? <Menu items={this.props.items}
+            {this.state.menuOpened
+                ? <Menu signOut={this.props.signOut} items={this.props.items}
                         onMenuClicked={this.onMenuClicked}/>
                 : null}
             <img src={profilePhoto}
@@ -31,11 +34,4 @@ class MenuContainer extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => {
-    return {
-        menuState: state.menuState.menuOpened,
-        items: state.menuState.items
-    }
-}
-
-export default connect(mapStateToProps, {setMenuState})(MenuContainer)
+export default connect(null, {signOut})(MenuContainer)
