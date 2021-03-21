@@ -5,7 +5,7 @@ const  SIGN_OUT = 'SIGN_OUT'
 const  TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 let initialState = {
-    userId: null,
+    currentUserId: null,
     name: null,
     isAuth: false,
     isFetching: false
@@ -21,9 +21,10 @@ const authReducer = (state = initialState, action) => {
             }
         }
         case SIGN_OUT: {
+            localStorage.clear()
             return {
                 ...state,
-                userId: null,
+                currentUserId: null,
                 name: null,
                 isAuth: false
             }
@@ -37,7 +38,7 @@ const authReducer = (state = initialState, action) => {
 
 }
 
-export const setUserData = (userId, name) => ({type: SET_USER_DATA, payload: {userId, name}})
+export const setUserData = (currentUserId, name) => ({type: SET_USER_DATA, payload: {currentUserId, name}})
 export const signOut = () => ({type: SIGN_OUT})
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
 
