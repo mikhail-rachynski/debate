@@ -1,6 +1,6 @@
 import * as axios from "axios";
 
-const URL = 'http://192.168.1.50:5000/api/v1/'
+const URL = 'https://api.iot7979.keenetic.pro/api/v1/'
 
 const instance = axios.create({
     // withCredentials: true,
@@ -40,6 +40,13 @@ export const gamesAPI = {
                 return response.data
             })
     },
+    getCurrentGame(gameId)
+    {
+        return instance.get('games/' + gameId)
+            .then(response => {
+                return response.data
+            })
+    },
     newGame(topic)
     {
         return instance.post(`games`, topic)
@@ -61,28 +68,36 @@ export const gamesAPI = {
                 return response.data
             })
     },
-    addPlayer(gameId, userId)
+    addPlayer(gameId)
     {
-        return instance.post(`games/${gameId}/add_player`, {user_id: userId})
+        return instance.post(`games/${gameId}/add_player`)
             .then(response => {
                 return response.data
             })
     },
-    deletePlayer(gameId, userId)
+    deletePlayer(gameId)
     {
-        return instance.delete(`games/${gameId}/delete_player`, {data: {user_id: userId}})
+        return instance.delete(`games/${gameId}/delete_player`)
             .then(response => {
                 return response.data
             })
     },
+}
+export const roundAPI = {
     getRounds(gameId)
     {
-        return NonAuthInstance.get(`games/${gameId}/get_rounds`)
+        return NonAuthInstance.get(`rounds?game=${gameId}`)
             .then(response => {
                 return response.data
             })
     },
-
+    setRating(roundId, ratingValue)
+    {
+        return instance.post(`rounds/${roundId}/set_rating`, {value: ratingValue})
+            .then(response => {
+                return response.data
+            })
+    }
 }
 
 export const speechAPI = {

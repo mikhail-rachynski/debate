@@ -1,0 +1,29 @@
+.round {
+    margin: 10px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 10px;
+    display: grid;
+    grid-template-areas:
+    "title rating"
+    "speeches speeches"
+    "form form";
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto;
+    grid-row-gap: 10px;
+}
+.title {
+    grid-area: title;
+}
+.speeches {
+    grid-area: speeches;
+}
+.form {
+    grid-area: form;
+    align-content: end;
+}
+.rating {
+    grid-area: rating;
+    justify-self: end;
+}

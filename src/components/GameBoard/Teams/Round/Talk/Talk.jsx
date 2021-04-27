@@ -13,8 +13,8 @@ const Talk = (props) => {
 const SpeechForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field placeholder={"Send speech..."} name={"text"} component={"input"}/>
-            <button>Add speech</button>
+            <div><Field placeholder={"Send speech..."} name={"text"} component={"textarea"}/></div>
+            <div><button>Add speech</button></div>
         </form>
     )
 }

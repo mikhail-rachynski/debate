@@ -5,7 +5,7 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     display: grid;
     grid-template-areas:
-    "details topic play users status";
+    "details topic rating users status";
     grid-template-columns: auto 1fr auto auto auto;
     grid-template-rows: 48px;
     align-items: center;
@@ -37,16 +37,26 @@
 
 .status {
     grid-area: status;
-}
-.play {
-    grid-area: play;
     cursor: pointer;
 }
-.details, .topic, .users, .status, .option, .play {
+.rating {
+    grid-area: rating;
+    border-radius: 7px;
+    border: darkslategray solid 1px;
+    height: 16px;
+    width: 70px;
+}
+.rating .scale {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    background-color: darkslategray;
+    height: 16px;
+}
+.details, .topic, .users, .status, .option, .rating {
     margin-left: 10px;
     margin-right: 10px;
+    cursor: pointer;
 }
-.details, .users, .status, .option, .play {
+.details, .users, .status, .option, .rating {
     text-align: center;
-
 }

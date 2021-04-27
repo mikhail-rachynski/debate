@@ -10,7 +10,7 @@ import { IconContext } from "react-icons";
 
 ReactDOM.render(
     <BrowserRouter>
-        <IconContext.Provider value={{ color: "darkslategray", size: "1.5em", className: "global-class-name" }}>
+        <IconContext.Provider value={{size: "1.5em", className: "icon-class-name" }}>
             <Provider store={store}>
                 <App />
             </Provider>
@@ -18,6 +18,5 @@ ReactDOM.render(
     </BrowserRouter>,
     document.getElementById('root')
 );
-
 
 reportWebVitals();

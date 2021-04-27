@@ -10,7 +10,7 @@ const Games = (props) => {
                                          {...props}/>)
     return (
         <div className={style.games}>
-            <div className={style.start}><GameMenu /></div>
+            <div className={style.start}><GameMenu isAuth={props.isAuth}/></div>
             <div className={style.games}>{postsElements}</div>
         </div>
     )

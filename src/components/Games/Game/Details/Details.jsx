@@ -22,7 +22,7 @@ class Details extends React.Component {
                 {this.props.users.length !== 0
                     ? this.props.users.map((user, index) =>
                         <span key={user.id}>{(index? ', ': '')}
-                            <NavLink to={'/profile/' + user.id}>
+                            <NavLink to={'/profile/' + user.id} title={user.role}>
                                 {user.name}
                             </NavLink>
                     </span>)

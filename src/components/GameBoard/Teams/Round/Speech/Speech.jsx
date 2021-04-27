@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./Speech.module.css"
-import profilePhoto from "../../../../assets/images/small_profile_photo.jpg";
-import {MdEdit, MdDeleteForever} from 'react-icons/md';
+import profilePhoto from "../../../../../assets/images/small_profile_photo.jpg";
+import {MdDeleteForever} from 'react-icons/md';
 import { AiFillEdit,  AiOutlineEdit} from "react-icons/ai";
 
 class Speech extends React.Component {
@@ -10,7 +10,7 @@ class Speech extends React.Component {
         speech: this.props.speech
     }
     deleteSpeech = () => {
-        this.props.deleteSpeech(this.props.currentGame, this.props.round_id, this.props.id)
+        this.props.deleteSpeech(this.props.currentGame.id, this.props.round_id, this.props.id)
     }
     onSpeechChange = (e) => {
         this.setState( {
@@ -26,7 +26,7 @@ class Speech extends React.Component {
         this.setState({
             editMode: false
         })
-        this.props.updateSpeech(this.props.currentGame, this.props.round_id, this.props.id, this.state.speech)
+        this.props.updateSpeech(this.props.currentGame.id, this.props.round_id, this.props.id, this.state.speech)
     }
     render() {
 
@@ -38,7 +38,7 @@ class Speech extends React.Component {
                 <textarea onChange={this.onSpeechChange}
                           autoFocus={true}
                           onBlur={this.deActivateEditMode}
-                          value={this.state.speech}></textarea>
+                          value={this.state.speech} />
             }
             {this.props.currentUserId === this.props.user_id &&
                 <div className={style.options}>

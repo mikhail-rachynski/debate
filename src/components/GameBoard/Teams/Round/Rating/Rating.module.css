@@ -1,0 +1,13 @@
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.star:hover {
+    cursor: pointer;
+    color: darkorange;
+}
+.star:hover ~ .star{
+    direction: rtl;
+    cursor: pointer;
+    color: darkorange;
+}

@@ -2,14 +2,14 @@ import React from 'react'
 import style from './Game.module.css'
 import Details from "./Details/Details";
 import {ImExit} from 'react-icons/im';
-import {MdPlayArrow,
+import {
+    MdPlayArrow,
     MdPeopleOutline,
     BiPauseCircle,
-    BiTime,
     IoGameControllerOutline,
     BsChevronCompactDown,
     BsChevronCompactUp,
-    BiKey
+    BiKey, FaFlagCheckered
 } from "react-icons/all";
 import {NavLink} from "react-router-dom";
 
@@ -61,13 +61,17 @@ class Game extends React.Component {
                         : <BiKey title="Login or register"/>
             }
             case "progress": {
-                return <IoGameControllerOutline title="Game is started" />
+                return <NavLink to={"/game/" + this.props.game.id}>
+                    <IoGameControllerOutline title="Game started" />
+                </NavLink>
             }
             case "pause": {
                 return <BiPauseCircle />
             }
             case "finished": {
-                return <BiTime />
+                return <NavLink to={"/game/" + this.props.game.id}>
+                    <FaFlagCheckered title="Game finished" />
+                </NavLink>
             }
         }
 
@@ -92,12 +96,8 @@ class Game extends React.Component {
                        onBlur={this.deActivateEditMode}
                        value={this.state.topic}/>
                 }
-                <div className={style.play}>
-                    {
-
-                    }
-                </div>
-                <div className={style.users}>
+                <div className={style.rating}><div className={style.scale} style={{width: "30%"}}></div></div>
+                <div className={style.users} onClick={this.viewDetails}>
                     <MdPeopleOutline size="1em"/> {this.props.game.users_count}
                 </div>
                 <div className={style.status}>

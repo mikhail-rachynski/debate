@@ -15,7 +15,6 @@ const authReducer = (state = initialState, action) => {
     switch(action.type) {
         case SET_USER_DATA: {
             return {
-                ...state,
                 ...action.payload,
                 isAuth: true
             }
@@ -23,7 +22,6 @@ const authReducer = (state = initialState, action) => {
         case SIGN_OUT: {
             localStorage.clear()
             return {
-                ...state,
                 currentUserId: null,
                 name: null,
                 isAuth: false

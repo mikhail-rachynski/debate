@@ -3,9 +3,9 @@ import style from './GameMenu.module.css'
 import {NavLink} from "react-router-dom";
 import {MdFiberNew, MdLiveHelp} from 'react-icons/md';
 
-const GameMenu = () => {
+const GameMenu = (props) => {
     return (<div className={style.gamesMenu}>
-        <NavLink to="/new" className={style.newGameButton}><MdFiberNew /></NavLink>
+        {props.isAuth && <NavLink to="/new" className={style.newGameButton}><MdFiberNew /></NavLink>}
         <NavLink to="/rules" className={style.rulesButton}><MdLiveHelp /></NavLink>
     </div>)
 }

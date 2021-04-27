@@ -1,57 +1,17 @@
 import {gamesAPI, roundAPI, speechAPI} from "../api/api";
 
-const SET_GAMES_DATA = 'SET_GAMES_DATA'
-const SET_SPEECH = 'SET_SPEECH'
-const SET_CURRENT_GAME = 'SET_CURRENT_GAME'
-const SET_ROUNDS = 'SET_ROUNDS'
 const SET_CURRENT_USER_ROLE = 'SET_CURRENT_USER_ROLE'
 
 let initialState = {
-    allGames: [],
-    currentGame: {topic: null},
-    currentUserRole: null,
-    speech: {},
-    boards: {
-        government: [],
-        opposition: []
-    },
-    rounds: []
+
 }
 
-const gameReducer = (state = initialState, action) => {
+const roundReducer = (state = initialState, action) => {
     switch(action.type) {
         case SET_GAMES_DATA: {
             return {
                 ...state,
                 allGames: action.games
-            }
-        }
-        case SET_CURRENT_GAME: {
-            return {
-                ...state,
-                currentGame: action.game
-
-            }
-        }
-        case SET_CURRENT_USER_ROLE: {
-            return {
-                ...state,
-                currentUserRole: action.role
-            }
-        }
-        case SET_ROUNDS: {
-            return {
-                ...state,
-                boards: action.rounds
-            }
-        }
-        case SET_SPEECH: {
-            return {
-                ...state,
-                speech: {
-                    ...state.speech,
-                    ...action.speech
-                }
             }
         }
         default:
@@ -114,10 +74,8 @@ export const getRounds = (gameId) => (dispatch) => {
     roundAPI.getRounds(gameId)
         .then(data => {
             if(!data.error){
-                dispatch(setRounds(data.boards))
-                for(let board in data.boards) {
-                    data.boards[board].map(round => dispatch(getSpeech(round.game_id, round.id)))
-                }
+                dispatch(setRounds(data.rounds))
+                data.rounds.map(round => dispatch(getSpeech(round.game_id, round.id)))
             }
         })
 }
@@ -125,7 +83,7 @@ export const setRoundRating = (roundId, value) => (dispatch) => {
     roundAPI.setRating(roundId, value)
         .then(data => {
             if(!data.error){
-                dispatch(setRounds(data.boards))
+                dispatch(setRounds(data))
             }
         })
 }
@@ -137,6 +95,7 @@ export const deleteGame = (gameId) => (dispatch) => {
             }
         })
 }
+
 export const getSpeech = (gameId, round) => (dispatch) => {
     speechAPI.getSpeeches(gameId, round)
         .then(data => {
@@ -169,4 +128,4 @@ export const deleteSpeech = (gameId, round, speechId) => (dispatch) => {
             }
         })
 }
-export default gameReducer
+export default roundReducer

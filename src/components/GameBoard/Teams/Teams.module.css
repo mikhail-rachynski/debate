@@ -1,0 +1,34 @@
+.teams {
+    display: grid;
+    grid-template-areas:
+    "title title"
+    "government opposition";
+    grid-template-columns: auto auto;
+    grid-template-rows: auto minmax(50px, auto);
+    border-radius: 10px;
+}
+.title {
+    background-color: #64a0a0;
+    color: white;
+    padding: 10px;
+
+}
+.government .title {
+    border-top-left-radius: 10px;
+}
+.opposition .title {
+    border-top-right-radius: 10px;
+}
+.government {
+    grid-area: government;
+    background-color: #f1f1f1;
+    border-bottom-left-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.opposition {
+    grid-area: opposition;
+    background-color: #f1f1f1;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
