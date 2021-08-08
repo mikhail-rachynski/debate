@@ -23,7 +23,7 @@
     grid-area: form;
     align-content: end;
 }
-.rating {
+.rightElement {
     grid-area: rating;
     justify-self: end;
 }

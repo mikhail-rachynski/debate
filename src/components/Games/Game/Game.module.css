@@ -41,16 +41,13 @@
 }
 .rating {
     grid-area: rating;
-    border-radius: 7px;
     border: darkslategray solid 1px;
-    height: 16px;
+    height: 8px;
     width: 70px;
 }
 .rating .scale {
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
     background-color: darkslategray;
-    height: 16px;
+    height: 8px;
 }
 .details, .topic, .users, .status, .option, .rating {
     margin-left: 10px;

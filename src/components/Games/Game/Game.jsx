@@ -1,6 +1,5 @@
 import React from 'react'
 import style from './Game.module.css'
-import Details from "./Details/Details";
 import {ImExit} from 'react-icons/im';
 import {
     MdPlayArrow,
@@ -12,16 +11,18 @@ import {
     BiKey, FaFlagCheckered
 } from "react-icons/all";
 import {NavLink} from "react-router-dom";
+import Details from "./Details/Details";
 
 class Game extends React.Component {
     state = {
         editMode: false,
-        viewDetails: false,
+        viewDetails: this.props.gameDetailsOpened,
         topic: this.props.game.topic
     }
-    viewDetails = () => {
+    viewDetails = (e) => {
+        e.stopPropagation()
         this.setState({
-            viewDetails: this.state.viewDetails ? false : true
+            viewDetails: !this.state.viewDetails
         })
     }
     play = () => {
@@ -52,7 +53,7 @@ class Game extends React.Component {
     status = () => {
         switch(this.props.game.status){
             case "waiting": {
-                return this.props.game.users.some(item => item.id === this.props.currentUserId)
+                return this.props.game.users && this.props.game.users.some(item => item.id === this.props.currentUserId)
                     ? <ImExit title="Exit"
                               onClick={this.exit}/>
                     : this.props.isAuth
@@ -96,20 +97,22 @@ class Game extends React.Component {
                        onBlur={this.deActivateEditMode}
                        value={this.state.topic}/>
                 }
-                <div className={style.rating}><div className={style.scale} style={{width: "30%"}}></div></div>
+                <div className={style.rating}>
+                    <div className={style.scale}
+                         style={{width: `${this.props.game.score}%`}}/>
+                </div>
                 <div className={style.users} onClick={this.viewDetails}>
-                    <MdPeopleOutline size="1em"/> {this.props.game.users_count}
+                    <MdPeopleOutline size="1em"/> {this.props.game.users && this.props.game.users.length}
                 </div>
                 <div className={style.status}>
                     {this.status()}
                 </div>
-
-
             </div>
             {
                 this.state.viewDetails
                     ? <Details users={this.props.game.users}
-                               {...this.props}
+                               editable={this.props.game.editable}
+                               time={this.props.game.time}
                                gameId={this.props.game.id}
                                editMode={this.state.editMode}
                                activateEditMode={this.activateEditMode}
