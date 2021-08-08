@@ -21,7 +21,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "HTTPS=true PORT=5080 react-scripts start",
+    "start": "HTTPS=true PORT=3000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "react-use-websocket": "^2.7.1"
   }
 }

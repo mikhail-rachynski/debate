@@ -12,6 +12,7 @@ class RoundContainer extends React.Component {
                    roundId={round.id}
                    roundType={round.round_type}
                    rating={round.rating}
+                   startTime={round.created_at}
                    setRoundRating={this.props.setRoundRating}
                    {...this.props}
                    />)}
@@ -22,7 +23,6 @@ class RoundContainer extends React.Component {
 const mapStateToProps = (state) => {
     return {
         speech: state.games.speech,
-        // rounds: state.games.rounds,
         currentGame: state.games.currentGame,
         isAuth: state.auth.isAuth,
         currentUserId: state.auth.currentUserId,

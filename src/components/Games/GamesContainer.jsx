@@ -1,11 +1,22 @@
 import React from 'react'
 import {connect} from "react-redux";
-import {addPlayer, deleteGame, exitPlayerFromGame, getAllGames, updateGameTopic} from "../../redux/game-reducer";
+import {
+    addPlayer,
+    deleteGame,
+    exitPlayerFromGame,
+    getAllGames,
+    updateGameTopic,
+    webSocketGames
+} from "../../redux/game-reducer";
 import Games from "./Games";
 
 class GamesContainer extends React.Component{
     componentDidMount() {
         this.props.getAllGames()
+        this.props.webSocketGames(true)
+    }
+    componentWillUnmount() {
+        this.props.webSocketGames(false)
     }
 
     render() {
@@ -27,4 +38,5 @@ export default connect(mapStateToProps, {
     exitPlayerFromGame,
     deleteGame,
     updateGameTopic,
+    webSocketGames
 })(GamesContainer)
