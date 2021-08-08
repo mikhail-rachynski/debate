@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import {connect} from "react-redux"
 import Menu from "./Menu";
-import profilePhoto from "../../../assets/images/small_profile_photo.jpg";
-import {signOut} from "../../../redux/auth-reducer";
-
+import profilePhoto from "../../../../assets/images/small_profile_photo.jpg";
+import {signOut} from "../../../../redux/auth-reducer";
+import style from "./Menu.module.css"
 
 const MenuContainer = (props) => {
     let [dropDownOpened, setDropDownOpened] = useState(false)
@@ -22,7 +22,7 @@ const MenuContainer = (props) => {
             : null}
         <img src={profilePhoto}
              alt={"User menu"}
-             className="dropimg"
+             className={style.dropimg}
              onClick={() => {onMenuClicked()}}/>
     </>
 

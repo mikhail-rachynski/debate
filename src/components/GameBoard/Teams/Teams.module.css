@@ -8,15 +8,15 @@
     border-radius: 10px;
 }
 .title {
-    background-color: #64a0a0;
     color: white;
     padding: 10px;
-
 }
 .government .title {
+    background-color: #64a0a0;
     border-top-left-radius: 10px;
 }
 .opposition .title {
+    background-color: #a06464;
     border-top-right-radius: 10px;
 }
 .government {

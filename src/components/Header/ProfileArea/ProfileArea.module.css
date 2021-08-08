@@ -1,0 +1,22 @@
+.profileArea {
+    display: grid;
+    grid-template-areas:
+    "menu name"
+    "menu notifications";
+    grid-template-columns: 80px 1fr;
+}
+.menu {
+    padding: 10px;
+    grid-area: menu;
+}
+
+.userName {
+    padding: 10px;
+    grid-area: name;
+}
+
+.notifications {
+    justify-self: center;
+    padding: 10px;
+    grid-area: notifications;
+}

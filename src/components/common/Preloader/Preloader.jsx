@@ -1,13 +1,8 @@
 import React from 'react'
-import s from "./Preloader.module.css";
+import style from "./Preloader.module.css";
 
 let Preloader = () => {
-    return <div className={s.ldsEllipsis}>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
+    return <div className={style.loader}>Loading...</div>
 }
 
 export default Preloader

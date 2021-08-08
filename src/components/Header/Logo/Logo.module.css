@@ -1,0 +1,10 @@
+.logo {
+    height: 40px;
+    cursor: pointer;
+    justify-items: center;
+}
+.caption {
+    height: 10px;
+    cursor: pointer;
+    justify-items: center;
+}

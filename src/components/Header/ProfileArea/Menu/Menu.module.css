@@ -1,5 +1,6 @@
 .dropimg {
     position: relative;
+    border-radius: 50%;
 }
 
 /* Dropdown button on hover & focus */

@@ -35,12 +35,12 @@ export const usersAPI = {
 export const gamesAPI = {
     getGames()
     {
-        return NonAuthInstance.get(`games`)
+        return instance.get(`games`)
             .then(response => {
                 return response.data
             })
     },
-    getCurrentGame(gameId)
+    getGame(gameId)
     {
         return instance.get('games/' + gameId)
             .then(response => {

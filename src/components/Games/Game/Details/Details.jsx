@@ -4,23 +4,21 @@ import {NavLink} from "react-router-dom";
 import {AiFillEdit, AiOutlineEdit} from "react-icons/ai";
 import {MdDeleteForever} from "react-icons/md";
 
-class Details extends React.Component {
-
-    render() {
+const Details = ({editable, editMode, activateEditMode, deleteCurrentGame, time, users}) => {
         return (<div className={style.details}>
-            <div className={style.option}>
-                {this.props.currentUserId === this.props.game.creator &&
+        <div className={style.option}>
+                    {editable &&
                 <div>
-                    {this.props.editMode
+                    {editMode
                         ? <AiOutlineEdit />
-                        : <AiFillEdit onClick ={this.props.activateEditMode} />}
-                    <MdDeleteForever onClick={this.props.deleteCurrentGame} />
+                        : <AiFillEdit onClick ={activateEditMode} />}
+                    <MdDeleteForever onClick={deleteCurrentGame} />
                 </div>}
             </div>
-            <div className={style.status}>Created: {this.props.game.time}</div>
+            <div className={style.status}>Created: {time}</div>
             <div className={style.users}>
-                {this.props.users.length !== 0
-                    ? this.props.users.map((user, index) =>
+                {users
+                    ? users.map((user, index) =>
                         <span key={user.id}>{(index? ', ': '')}
                             <NavLink to={'/profile/' + user.id} title={user.role}>
                                 {user.name}
@@ -29,9 +27,6 @@ class Details extends React.Component {
                     : "Waiting for players"}
             </div>
         </div>)
-    }
-
-
 }
 
 export default Details

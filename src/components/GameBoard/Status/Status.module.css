@@ -3,13 +3,14 @@
     height: 60px;
     border-radius: 10px;
     background-color: #f1f1f1;
-    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     padding: 10px;
     display: grid;
     grid-template-areas:
     "topic role"
+    "usersList usersList"
     "round time";
-    grid-template-columns: auto auto;
+    grid-template-columns: 50% 50%;
     grid-template-rows: auto auto;
 }
 
@@ -22,6 +23,15 @@
 .role {
     grid-area: role;
 }
+.usersList {
+    grid-area: usersList;
+    color: black;
+}
+.usersList a {
+    color: darkslategrey;
+    text-decoration: none;
+}
 .time {
     grid-area: time;
 }
+

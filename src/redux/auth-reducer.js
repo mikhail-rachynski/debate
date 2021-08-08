@@ -63,16 +63,10 @@ export const signUp = (formData) => {
     }
 }
 
-export const authMe = () => {
-    return (dispatch) => {
-        dispatch(toggleIsFetching(true))
-        authAPI.authMe()
-            .then(data => {
-                dispatch(toggleIsFetching(false))
-                if(!data.error) {
-                    dispatch(setUserData(data.current_user.id, data.current_user.name))
-                }
-            })
+export const authMe = () => async (dispatch) => {
+    let data = await authAPI.authMe()
+    if(!data.error) {
+        dispatch(setUserData(data.current_user.id, data.current_user.name))
     }
 }
 
