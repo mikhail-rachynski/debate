@@ -1,6 +1,9 @@
 import React from "react"
-import {BsEnvelope} from "react-icons/bs";
+import {IoNotificationsOutline} from "react-icons/io5";
+import style from "./Notifications.module.css";
 
-export const Notifications = () => {
-    return <div><BsEnvelope/></div>
+export const Notifications = ({count}) => {
+    return <div><IoNotificationsOutline />
+        <span className={count > 0 ? style.newMessage: style.count}>{count}</span>
+    </div>
 }

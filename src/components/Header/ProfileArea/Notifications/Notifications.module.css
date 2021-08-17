@@ -1,0 +1,24 @@
+.count, .newMessage {
+    font-size: 12px;
+    padding: 3px;
+    border-radius: 20%;
+    background-color: #dddddd;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+}
+
+.newMessage {
+    background-color: #a06464;
+    color: white;
+}
+
+.close {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 999;
+}

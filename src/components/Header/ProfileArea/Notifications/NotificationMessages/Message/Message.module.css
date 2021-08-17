@@ -1,0 +1,26 @@
+.message, .read {
+    font-size: 13px;
+    display: grid;
+    grid-template-areas: "text time";
+    grid-template-columns: 1fr auto;
+    margin: 5px;
+    background-color: #dddddd;
+    border-radius: 5px;
+
+}
+
+.text {
+    grid-area: text;
+    padding: 5px;
+    align-self: center;
+}
+.time {
+    grid-area: time;
+    padding: 8px;
+    align-self: center;
+}
+
+.read {
+    background-color: #a06464;
+    color: white;
+}
