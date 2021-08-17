@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import style from "./GamesBoard.module.css"
 import {withRouter} from "react-router-dom"
 import {compose} from "redux";
-import {getGame, getRounds, webSocketGame} from "../../redux/game-reducer";
+import {getCurrentGame, getRounds, resetCurrentGame, webSocketGame} from "../../redux/game-reducer";
 import StatusContainer from "./Status/StatusContainer";
 import TeamsContainer from "./Teams/TeamsContainer";
 
@@ -15,7 +15,9 @@ class GameBoardContainer extends React.Component {
         this.props.webSocketGame(gameId)
     }
     componentWillUnmount() {
-        this.props.webSocketGame()
+        const gameId = this.props.match.params.id
+        this.props.webSocketGame(gameId)
+        this.props.resetCurrentGame()
     }
     render() {
         return <div className={style.board}>
@@ -29,4 +31,4 @@ class GameBoardContainer extends React.Component {
     }
 }
 
-export default compose(connect(null, {getCurrentGame: getGame, getRounds, webSocketGame}), withRouter)(GameBoardContainer)
+export default compose(connect(null, {getCurrentGame, resetCurrentGame, getRounds, webSocketGame}), withRouter)(GameBoardContainer)
