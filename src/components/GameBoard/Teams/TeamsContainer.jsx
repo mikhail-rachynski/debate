@@ -32,7 +32,7 @@ const TeamsContainer = ({rounds}) => {
 }
 const mapStateToProps = (state) => {
     return {
-        rounds: state.games.rounds
+        rounds: state.game.rounds
     }
 }
 

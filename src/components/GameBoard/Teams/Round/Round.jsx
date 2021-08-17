@@ -28,7 +28,7 @@ class Round extends React.Component {
                 :<Countdown startTime={this.props.startTime}/>}
             </div>
             <div className={style.speeches}>
-                <SpeechContainer roundType={[this.props.roundType]}/>
+                <SpeechContainer roundId={this.props.roundId}/>
             </div>
             <div className={style.form}>
                 {this.props.isAuth &&

@@ -21,7 +21,7 @@
 }
 .option {
     grid-area: option;
-    z-index: 101;
+    z-index: 52;
     cursor: pointer;
 }
 .status {

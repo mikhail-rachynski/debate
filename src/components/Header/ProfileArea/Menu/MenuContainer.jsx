@@ -5,7 +5,7 @@ import profilePhoto from "../../../../assets/images/small_profile_photo.jpg";
 import {signOut} from "../../../../redux/auth-reducer";
 import style from "./Menu.module.css"
 
-const MenuContainer = (props) => {
+const MenuContainer = ({userName, signOut}) => {
     let [dropDownOpened, setDropDownOpened] = useState(false)
 
     const onMenuClicked = () => {
@@ -17,8 +17,9 @@ const MenuContainer = (props) => {
     }
     return <>
         {dropDownOpened
-            ? <Menu signOut={props.signOut}
-                    onMenuClicked={onMenuClicked}/>
+            ? <Menu signOut={signOut}
+                    onMenuClicked={onMenuClicked}
+                    userName={userName}/>
             : null}
         <img src={profilePhoto}
              alt={"User menu"}
@@ -28,4 +29,11 @@ const MenuContainer = (props) => {
 
 }
 
-export default connect(null, {signOut})(MenuContainer)
+
+const mapStateToProps = (state) => {
+    return {
+        userName: state.auth.userName
+    }
+}
+
+export default connect(mapStateToProps, {signOut})(MenuContainer)

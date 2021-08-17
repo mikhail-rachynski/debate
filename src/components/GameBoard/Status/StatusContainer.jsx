@@ -10,8 +10,8 @@ class StatusContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        currentGame: state.games.currentGame,
-        currentUserRole: state.games.currentUserRole
+        currentGame: state.game.currentGame,
+        currentUserRole: state.game.currentGame.current_user_role
     }
 }
 export default connect(mapStateToProps, null)(StatusContainer)

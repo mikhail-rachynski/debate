@@ -10,7 +10,7 @@
     grid-template-rows: 48px;
     align-items: center;
     position: relative;
-    z-index: 100;
+    z-index: 50;
 }
 .game a {
     color: black;
@@ -27,7 +27,7 @@
 }
 .option {
      grid-area: option;
-     z-index: 1000;
+     z-index: 51;
  }
 .users {
     grid-area: users;

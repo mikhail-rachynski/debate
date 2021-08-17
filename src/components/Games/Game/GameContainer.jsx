@@ -1,6 +1,6 @@
 import React from "react"
 import {connect} from "react-redux";
-import {getGame} from "../../../redux/game-reducer";
+import {getGame} from "../../../redux/games-reducer";
 import Game from "./Game";
 
 class GameContainer extends React.Component {

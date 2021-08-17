@@ -10,7 +10,7 @@ class Speech extends React.Component {
         speech: this.props.speech
     }
     deleteSpeech = () => {
-        this.props.deleteSpeech(this.props.currentGame.id, this.props.round_id, this.props.id)
+        this.props.deleteSpeech(this.props.speechId)
     }
     onSpeechChange = (e) => {
         this.setState( {
@@ -26,12 +26,12 @@ class Speech extends React.Component {
         this.setState({
             editMode: false
         })
-        this.props.updateSpeech(this.props.currentGame.id, this.props.round_id, this.props.id, this.state.speech)
+        this.props.updateSpeech(this.props.speechId, this.state.speech)
     }
     render() {
 
         return <div className={style.speech}>
-            <img src={profilePhoto} className={style.user} alt={this.props.user_name}/>
+            <img src={profilePhoto} className={style.user} alt={this.props.userName}/>
             {!this.state.editMode &&
                 <div className={style.text}>{this.props.speech}</div>}
             {this.state.editMode &&
@@ -40,7 +40,7 @@ class Speech extends React.Component {
                           onBlur={this.deActivateEditMode}
                           value={this.state.speech} />
             }
-            {this.props.currentUserId === this.props.user_id &&
+            {this.props.currentUserId === this.props.userId &&
                 <div className={style.options}>
                     {this.state.editMode ? <AiOutlineEdit /> : <AiFillEdit onClick ={this.activateEditMode} />}
                     <MdDeleteForever onClick={this.deleteSpeech} />

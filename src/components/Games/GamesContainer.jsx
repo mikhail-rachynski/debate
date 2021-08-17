@@ -7,7 +7,7 @@ import {
     getAllGames,
     updateGameTopic,
     webSocketGames
-} from "../../redux/game-reducer";
+} from "../../redux/games-reducer";
 import Games from "./Games";
 
 class GamesContainer extends React.Component{

@@ -1,12 +1,12 @@
 import React from "react"
 import style from "./LoaderApp.module.css"
-import Preloader from "../Preloader/Preloader";
+import CircleLoader from "../CircleLoader/CircleLoader";
 
 const LoaderApp = () => {
     return <div className={style.loaderApp}>
-        <div className={style.loaderBody}>
-            <div><Logo /></div>
-            <Preloader/>
+        <div className={style.loader}>
+            <Logo />
+            <CircleLoader/>
         </div>
     </div>
 }

@@ -1,27 +1,36 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import Speech from "./Speech";
 import {deleteSpeech, updateSpeech} from "../../../../../redux/game-reducer";
 
-class SpeechContainer extends React.Component {
-    render() {
-        return <div>
-            {this.props.speech[this.props.roundType] &&
-                this.props.speech[this.props.roundType].map(speech => {
-                    return <div key={speech.id}>
-                        <Speech {...this.props} {...speech}/>
-                    </div>
-                })
-            }</div>
-    }
+function SpeechContainer(props) {
+    const [speeches, setSpeeches] = useState([])
+
+    useEffect(() => {
+        setSpeeches(props.speeches.filter(speech => speech.round_id === props.roundId))
+    }, [props.speeches])
+    return <div>
+        {speeches &&
+        speeches.map(speech => {
+            return <div key={speech.id}>
+                <Speech speechId={speech.id}
+                        speech={speech.speech}
+                        userId={speech.user_id}
+                        userName={speech.user_name}
+                        currentUserId={props.currentUserId}
+                        updateSpeech={props.updateSpeech}
+                        deleteSpeech={props.deleteSpeech}/>
+            </div>
+        })
+        }</div>
 }
 
 const mapStateToProps = (state) => {
     return {
-        speech: state.games.speech,
+        speeches: state.game.speeches,
         currentUserId: state.auth.currentUserId,
-        currentGame: state.games.currentGame,
-        isFetching: state.games.isFetching
+        currentGame: state.game.currentGame,
+        isFetching: state.game.isFetching
     }
 }
 

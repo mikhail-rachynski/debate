@@ -1,8 +1,10 @@
 import React from 'react'
 import {Field, reduxForm} from "redux-form";
-import {newGame} from "../../redux/game-reducer";
+import {newGame} from "../../../../redux/games-reducer";
 import {connect} from "react-redux";
-import style from "../Auth/auth.module.css";
+import style from "../../../Auth/auth.module.css";
+import {compose} from "redux";
+import {withPopUp} from "../../../../hoc/PopUp/withPopUp";
 
 const NewGameForm = (props) => {
     return <div className={style.form}><h1>Create new game</h1>
@@ -23,6 +25,7 @@ const NewGameReduxForm = reduxForm ({
 
 const NewGame = (props) => {
     const onSubmit = (formData) => {
+        props.changePopUp()
         props.newGame(formData)
     }
     return <div>
@@ -36,4 +39,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {newGame})(NewGame)
+export default compose(connect(mapStateToProps, {newGame}), withPopUp)(NewGame)

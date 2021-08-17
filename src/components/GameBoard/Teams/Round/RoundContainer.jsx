@@ -1,33 +1,35 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {connect} from "react-redux";
-import {pushSpeech, setRoundRating} from "../../../../redux/game-reducer";
+import {getSpeeches, pushSpeech, setRoundRating} from "../../../../redux/game-reducer";
 import Round from "./Round";
 
-class RoundContainer extends React.Component {
-    render() {
-        return <div>{this.props.rounds
-            .sort((a, b) => (a.id > b.id) ? 1 : -1)
-            .map(round =>
+const RoundContainer = (props) => {
+    useEffect(() => {
+        props.currentGame.id &&
+        props.getSpeeches(props.currentGame.id)
+    },[props.currentGame.id])
+
+    return <div>{props.rounds
+        .sort((a, b) => (a.id > b.id) ? 1 : -1)
+        .map(round =>
             <Round key={round.id}
                    roundId={round.id}
                    roundType={round.round_type}
                    rating={round.rating}
                    startTime={round.created_at}
-                   setRoundRating={this.props.setRoundRating}
-                   {...this.props}
-                   />)}
-        </div>
-    }
+                   setRoundRating={props.setRoundRating}
+                   {...props}
+            />)}
+    </div>
 }
 
 const mapStateToProps = (state) => {
     return {
-        speech: state.games.speech,
-        currentGame: state.games.currentGame,
+        currentGame: state.game.currentGame,
         isAuth: state.auth.isAuth,
         currentUserId: state.auth.currentUserId,
-        currentUserRole: state.games.currentUserRole
+        currentUserRole: state.game.currentGame.current_user_role
     }
 }
 
-export default connect(mapStateToProps, {pushSpeech, setRoundRating})(RoundContainer)
+export default connect(mapStateToProps, {pushSpeech, setRoundRating, getSpeeches})(RoundContainer)

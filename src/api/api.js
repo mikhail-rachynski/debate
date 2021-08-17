@@ -108,9 +108,9 @@ export const speechAPI = {
                 return response.data
             })
     },
-    getSpeeches(gameId, round)
+    getSpeeches(gameId)
     {
-        return NonAuthInstance.get(`speeches?round=${round}`)
+        return NonAuthInstance.get(`speeches?game=${gameId}`)
             .then(response => {
                 return response.data
             })

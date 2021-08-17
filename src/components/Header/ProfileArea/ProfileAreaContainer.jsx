@@ -1,22 +1,17 @@
 import React from "react"
 import style from "./ProfileArea.module.css";
 import MenuContainer from "./Menu/MenuContainer";
-import {Notifications} from "./Notifications/Notifications";
-import {connect} from "react-redux";
+import NotificationsContainer from "./Notifications/NotificationsContainer";
 
-const ProfileAreaContainer = (props) => {
+const ProfileAreaContainer = () => {
     return <div className={style.profileArea}>
-        <div className={style.menu} onClick={(e) => e.stopPropagation()}>
-            <MenuContainer/></div>
-        <div className={style.userName}>{props.name}</div>
-        <div className={style.notifications}><Notifications /></div>
+        <div className={style.menu}>
+            <MenuContainer/>
+        </div>
+        <div className={style.notifications}>
+            <NotificationsContainer/>
+        </div>
     </div>
 }
 
-const mapStateToProps = (state) => {
-    return {
-        name: state.auth.name
-    }
-}
-
-export default connect(mapStateToProps, null)(ProfileAreaContainer)
+export default ProfileAreaContainer

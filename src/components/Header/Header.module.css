@@ -17,10 +17,3 @@
 .userArea {
     grid-area: userArea;
 }
-
-
-/*.headerMenu {*/
-/*    grid-area: login;*/
-/*    padding: 10px;*/
-/*    text-align: right;*/
-/*}*/
