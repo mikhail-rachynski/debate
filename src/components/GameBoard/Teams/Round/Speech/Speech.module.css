@@ -1,28 +1,93 @@
 .speech {
-    font-size: medium;
     width: auto;
-    background-color: #f1f1f1;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    padding: 10px;
+    border-radius: 10px;
+    /*box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);*/
     display: grid;
     grid-template-areas:
-    "user text options";
-    grid-template-columns: 40px auto 40px;
-    grid-template-rows: auto;
+    "header"
+    "text"
+    "footer";
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
     grid-column-gap: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
-.user {
-    grid-area: user;
-    height: 40px;
-    width: 40px;
+/*Header*/
+.header {
+    font-size: 13px;
+    grid-area: header;
+    padding: 10px;
+    display: grid;
+    grid-template-areas: "speaker options";
+    grid-template-columns: auto 20px;
+    border-bottom: darkgray 1px solid;
+    background-color: #dddddd;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
-.text {
-    grid-area: text;
-    text-align: justify;
+.speaker {
+    grid-area: speaker;
+    display: grid;
+    grid-template-areas: "avatar spoke";
+    grid-template-columns: 30px auto auto;
+}
+.avatar {
+    grid-area: avatar;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    align-self: center;
+}
+.spoke {
+    grid-area: spoke;
+    align-self: center;
+}
+.userName {
+    font-weight: bold;
+}
+.time {
+    align-self: center;
 }
 .options {
-    padding: 10px;
+    height: 20px;
     grid-area: options;
+    position: relative;
     justify-self: center;
+}
+.optionsMenu {
+    white-space: nowrap;
+    position: absolute;
+    left: -35px;
+    top: -7px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 6px;
+    border-radius: 10px;
+}
+
+/*Text*/
+.text {
+    padding: 10px;
+    grid-area: text;
+    text-align: justify;
+    background-color: #dddddd;
+}
+/*Footer*/
+.footer {
+    background-color: #dddddd;
+    font-size: smaller;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.replyButton {
+    padding: 10px;
+    background-color: lightblue;
+    float: right;
+}
+.reply {
+    padding-left: 20px;
+    background-color: #eaeaea;
+
 }
