@@ -1,21 +1,43 @@
-import React from "react"
+import React from 'react'
 import {connect} from "react-redux";
-import {getGame} from "../../../redux/games-reducer";
+import {
+    addPlayer,
+    deleteGame,
+    exitPlayerFromGame,
+    updateGameTopic,
+    webSocketGames
+} from "../../../redux/games-reducer";
 import Game from "./Game";
 
-class GameContainer extends React.Component {
-    componentDidMount() {
-        this.props.getGame(this.props.game.id)
-    }
-    render() {
-        return <Game isFetching={this.props.isFetching}/>
-    }
+const GameContainer = ({game, currentUserId,
+                           isAuth,
+                           updateGameTopic,
+                           deleteGame,
+                           addPlayer,
+                           exitPlayerFromGame, kinds}) => {
+
+    return <Game game={game}
+                 currentUserId={currentUserId}
+                 isAuth={isAuth}
+                 updateGameTopic={updateGameTopic}
+                 deleteGame={deleteGame}
+                 addPlayer={addPlayer}
+                 exitPlayerFromGame={exitPlayerFromGame}
+                 kinds={kinds}
+    />
 }
 
 const mapStateToProps = (state) => {
     return {
-        isFetching: state.games.isFetching
+        currentUserId: state.auth.currentUserId,
+        isAuth: state.auth.isAuth
     }
 }
 
-export default connect(mapStateToProps, {getGame})(GameContainer)
+export default connect(mapStateToProps, {
+    addPlayer,
+    exitPlayerFromGame,
+    deleteGame,
+    updateGameTopic,
+    webSocketGames
+})(GameContainer)

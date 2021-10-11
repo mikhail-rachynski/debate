@@ -6,29 +6,29 @@ import {signOut} from "../../../../redux/auth-reducer";
 import style from "./Menu.module.css"
 
 const MenuContainer = ({userName, signOut}) => {
-    let [dropDownOpened, setDropDownOpened] = useState(false)
+    let [menuShown, setMenuShown] = useState(false)
 
-    const onMenuClicked = () => {
-        if (dropDownOpened === true) {
-            setDropDownOpened(false)
-        } else {
-            setDropDownOpened(true)
-        }
+    const showMenu = (e) => {
+        e.stopPropagation();
+        setMenuShown(true)
+        document.addEventListener('click', closeMenu);
     }
+    const closeMenu = () => {
+        setMenuShown(false)
+        document.removeEventListener('click', closeMenu);
+    }
+
     return <>
-        {dropDownOpened
+        {menuShown
             ? <Menu signOut={signOut}
-                    onMenuClicked={onMenuClicked}
                     userName={userName}/>
             : null}
         <img src={profilePhoto}
              alt={"User menu"}
              className={style.dropimg}
-             onClick={() => {onMenuClicked()}}/>
+             onClick={showMenu}/>
     </>
-
 }
-
 
 const mapStateToProps = (state) => {
     return {

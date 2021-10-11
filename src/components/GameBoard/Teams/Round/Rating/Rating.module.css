@@ -1,6 +1,9 @@
-.rating {
+.rating, .judge {
     display: flex;
     flex-direction: row-reverse;
+}
+.star {
+    color: red;
 }
 .star:hover {
     cursor: pointer;

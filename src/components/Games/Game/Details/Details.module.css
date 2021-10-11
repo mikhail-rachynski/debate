@@ -1,17 +1,14 @@
 .details {
     background-color: #f8f6f6;
     color: dimgrey;
-    margin-top: -12px;
-    margin-bottom: 12px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: -12px 10px 12px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2);
     display: grid;
     grid-template-areas:
-    "option status users";
-    grid-template-columns: auto 1fr 2fr;
+    "option status users close";
+    grid-template-columns: auto 1fr 2fr auto;
     grid-template-rows: minmax(48px, auto);
     align-items: center;
 }
@@ -42,4 +39,12 @@
 }
 .users, .status, .option {
     text-align: center;
+}
+.close {
+    grid-area: close;
+    padding: 10px;
+    background-color: dimgrey;
+    cursor: pointer;
+    color: dimgrey;
+    border-bottom-right-radius: 5px;
 }

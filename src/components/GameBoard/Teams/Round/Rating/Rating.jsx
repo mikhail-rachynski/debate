@@ -1,27 +1,40 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import style from './Rating.module.css'
 
-class Rating extends React.Component {
-    onChangeRating = (i) => {
-        this.props.currentUserRole === "referee" && this.props.setRoundRating(this.props.roundId, i)
-    }
-    renderRatingStars = () => {
-        let rating = []
-        for(let i = 0; i < 5; i++) {
-            rating.unshift(this.props.rating > i
-                ? <AiFillStar size="1.2em" className={this.props.currentUserRole === "referee" && style.star}
-                              key={i}
-                              onClick={() => this.onChangeRating(i + 1)} />
-                : <AiOutlineStar size="1.2em" className={this.props.currentUserRole === "referee" && style.star}
-                                 key={i}
-                                 onClick={() => this.onChangeRating(i + 1)} />)
+const Rating = (props) => {
+    const [judge, setJudge] = useState(false)
+    const [rating, setRating] = useState(0)
+
+    useEffect(() => {
+        props.ratingChange ? setJudge(true) : setJudge(false)
+    }, [props.ratingChange])
+
+    useEffect(() => {
+        !judge && setRating(props.rating)
+    },[judge, props.rating])
+
+    const onChangeRating = (i) => {
+        if(judge) {
+            props.setRoundRating(props.roundId, i+1)
+            setRating(props.changedRoundRating.rating)
         }
-        return rating
     }
-    render() {
-        return <div className={style.rating}>{this.renderRatingStars()}</div>
+
+    const renderRatingStars = () => {
+        let ratingStars = []
+        for(let i = 0; i < 5; i++) {
+            ratingStars.unshift(rating > i
+                ? <AiFillStar size="1.2em" className={judge && style.star}
+                              key={i}
+                              onClick={() => onChangeRating(i)} />
+                : <AiOutlineStar size="1.2em" className={judge && style.star}
+                                 key={i}
+                                 onClick={() => onChangeRating(i)} />)
+        }
+        return ratingStars
     }
+    return <div className={style.rating}>{renderRatingStars()}</div>
 }
 
 export default Rating

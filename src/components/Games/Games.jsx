@@ -5,12 +5,12 @@ import Game from "./Game/Game";
 
 
 const Games = (props) => {
-    let allGames =
+    let games =
         props.games.map((value) => <Game key={value.id} game={value} {...props}/>)
     return (
         <div className={style.games}>
             <div className={style.start}><GameMenu isAuth={props.isAuth}/></div>
-            <div className={style.games}>{allGames}</div>
+            <div className={style.games}>{games}</div>
         </div>
     )
 }

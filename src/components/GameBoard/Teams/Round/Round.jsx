@@ -1,47 +1,46 @@
-import React from 'react'
+import React, {useState} from 'react'
 import style from './Round.module.css'
 import SpeechContainer from "./Speech/SpeechContainer";
 import Talk from "./Talk/Talk";
 import Rating from "./Rating/Rating";
 import Countdown from "./Countdown/Countdown";
 
-class Round extends React.Component {
-    state = {
-        editMode: false
+const Round  = (props) => {
+    const [editMode, setEditMode] = useState(false)
+
+    const changeEditMode = () => {
+        !editMode
+            ? setEditMode(true)
+            : setEditMode(false)
     }
-    changeEditMode = () => {
-        !this.state.editMode
-            ? this.setState({ editMode: true })
-            : this.setState({ editMode: false })
-    }
-    render() {
-        return <div className={style.round}>
+
+    return <div className={style.round}>
+        <div className={style.header}>
             <div className={style.title}>
-                {this.props.roundType}
+                {props.roundType}
             </div>
             <div className={style.rightElement}>
-                {this.props.currentGame.status === "finished"
-                    ? <Rating roundId={this.props.roundId}
-                         setRoundRating={this.props.setRoundRating}
-                         currentUserRole={this.props.currentUserRole}
-                         rating={this.props.rating}/>
-                :<Countdown startTime={this.props.startTime}/>}
+                {props.currentGame.status === "finished"
+                    ? <Rating roundId={props.roundId}
+                              setRoundRating={props.setRoundRating}
+                              currentUserRole={props.currentUserRole}
+                              rating={props.rating}
+                              ratingChange={props.ratingChange}
+                              changedRoundRating={props.changedRoundRatings.filter((item) => item.roundId === props.roundId)[0]}/>
+                    :<Countdown startTime={props.startTime}/>}
             </div>
-            <div className={style.speeches}>
-                <SpeechContainer roundId={this.props.roundId}/>
-            </div>
-            <div className={style.form}>
-                {this.props.isAuth &&
-                <button onClick={this.changeEditMode}>
-                    {!this.state.editMode ? "Add speech" : "Close"}
-                </button>}
-                {this.state.editMode &&
-                <Talk {...this.props} changeEditMode={this.changeEditMode} />
-                }</div>
-
-
         </div>
-    }
+        <div className={style.speeches}>
+            <SpeechContainer roundId={props.roundId}  team={props.team} />
+        </div>
+        <div className={style.talk}>
+            {props.isAuth && !editMode  &&
+            <div onClick={changeEditMode}>Add speech</div>}
+            {editMode &&
+            <div><Talk {...props} changeEditMode={changeEditMode} /></div>
+            }</div>
+    </div>
+
 }
 
 export default Round

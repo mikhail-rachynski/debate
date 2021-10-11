@@ -15,9 +15,12 @@ const RoundContainer = (props) => {
             <Round key={round.id}
                    roundId={round.id}
                    roundType={round.round_type}
+                   team={round.team}
                    rating={round.rating}
                    startTime={round.created_at}
                    setRoundRating={props.setRoundRating}
+                   ratingChange={props.ratingChange}
+                   changedRoundRatings={props.changedRoundRatings}
                    {...props}
             />)}
     </div>
@@ -28,7 +31,9 @@ const mapStateToProps = (state) => {
         currentGame: state.game.currentGame,
         isAuth: state.auth.isAuth,
         currentUserId: state.auth.currentUserId,
-        currentUserRole: state.game.currentGame.current_user_role
+        currentUserRole: state.game.currentGame.current_user_role,
+        ratingChange: state.game.ratingChange,
+        changedRoundRatings: state.game.changedRoundRatings
     }
 }
 

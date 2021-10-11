@@ -1,18 +1,12 @@
-import React, {useState} from 'react'
+import React from 'react'
 import style from './GameMenu.module.css'
 import {NavLink} from "react-router-dom";
 import {MdFiberNew, MdLiveHelp} from 'react-icons/md';
-import NewGame from "./NewGame/NewGame";
 
-const GameMenu = (props) => {
-    const [newGamePopUp, setNewGamePopUp] = useState(false)
-
-    const changePopUp = () => {
-        newGamePopUp ? setNewGamePopUp(false) : setNewGamePopUp(true)
-    }
+const GameMenu = ({isAuth, gamesLength, changePopUp}) => {
     return (<div className={style.gamesMenu}>
-        {props.isAuth && <div className={style.newGameButton} onClick={changePopUp}><MdFiberNew /></div>}
-        {newGamePopUp && <NewGame changePopUp={changePopUp}/>}
+        {isAuth  && gamesLength > 0 && <div className={style.newGameButton} onClick={changePopUp}><MdFiberNew /></div>}
+
         <NavLink to="/rules" className={style.rulesButton}><MdLiveHelp /></NavLink>
     </div>)
 }

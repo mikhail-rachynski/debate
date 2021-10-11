@@ -1,14 +1,42 @@
 .games {
     display: grid;
     grid-template-areas:
-    "start"
+    "menu"
+    "kinds"
     "games";
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto;
+    grid-row-gap: 15px;
 }
-.start {
-    grid-area: start;
+.menu {
+    grid-area: menu;
+}
+.kinds {
+    grid-area: kinds;
+    text-align: center;
+}
+.kinds a {
+    text-decoration: none;
+    display: inline-table;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 .games {
     grid-area: games;
+
+}
+.newGame {
+    display: grid;
+    height: 60vmin ;
+    justify-content: center;
+    align-items: center;
+}
+.newGameButton {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background-color: #eaeaea;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
 }
