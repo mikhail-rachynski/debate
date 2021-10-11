@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import style from './Game.module.css'
 import {ImExit} from 'react-icons/im';
 import {
@@ -6,63 +6,60 @@ import {
     MdPeopleOutline,
     BiPauseCircle,
     IoGameControllerOutline,
-    BsChevronCompactDown,
-    BsChevronCompactUp,
     BiKey, FaFlagCheckered
 } from "react-icons/all";
 import {NavLink} from "react-router-dom";
-import Details from "./Details/Details";
+import DetailsContainer from "./Details/DetailsContainer";
+import {TimePassed} from "../../common/TimePassed/TimePassed";
+import Kind from "../../common/Kind/Kind";
+import {ErrorMessage, Field, Form, Formik} from "formik";
 
-class Game extends React.Component {
-    state = {
-        editMode: false,
-        viewDetails: this.props.gameDetailsOpened,
-        topic: this.props.game.topic
+const Game = (props) => {
+    const [editMode, setEditMode] = useState(false)
+    const [viewDetails, setViewDetails] = useState(false)
+    const [topic, setTopic] = useState(props.game.topic)
+    const [score, setScore] = useState(null)
+
+    useEffect(() => {
+        setTopic(props.game.topic)
+    }, [props.game.topic])
+
+    useEffect(() => {
+        setScore(props.game.score)
+    }, [props.game.score])
+
+    const changeStateViewDetails = () => {
+        !viewDetails ? setViewDetails(true) : setViewDetails(false)
     }
-    viewDetails = (e) => {
-        e.stopPropagation()
-        this.setState({
-            viewDetails: !this.state.viewDetails
-        })
+    const play = () => {
+        props.addPlayer(props.game.id, props.currentUserId)
     }
-    play = () => {
-        this.props.addPlayer(this.props.game.id, this.props.currentUserId)
+    const exit = () => {
+        props.exitPlayerFromGame(props.game.id, props.currentUserId)
     }
-    exit = () => {
-        this.props.exitPlayerFromGame(this.props.game.id, this.props.currentUserId)
+    const deleteCurrentGame = () => {
+        props.deleteGame(props.game.id)
     }
-    deleteCurrentGame = () => {
-        this.props.deleteGame(this.props.game.id)
+    const changeEditorMode = () => {
+        if(!editMode) {
+            setEditMode(true)
+        } else {
+            setEditMode(false)
+        }
     }
-    onTopicChange = (e) => {
-        this.setState( {
-            topic: e.currentTarget.value
-        })
-    }
-    activateEditMode = () => {
-        this.setState({
-            editMode: true
-        })
-    }
-    deActivateEditMode = () => {
-        this.setState({
-            editMode: false
-        })
-        this.props.updateGameTopic(this.props.game.id, this.state.topic)
-    }
-    status = () => {
-        switch(this.props.game.status){
+    const status = () => {
+        switch(props.game.status){
             case "waiting": {
-                return this.props.game.users && this.props.game.users.some(item => item.id === this.props.currentUserId)
+                return props.game.current_user_gamer
                     ? <ImExit title="Exit"
-                              onClick={this.exit}/>
-                    : this.props.isAuth
+                              onClick={exit}/>
+                    : props.isAuth
                         ? <MdPlayArrow title="Play"
-                                       onClick={this.play}/>
+                                       onClick={play}/>
                         : <BiKey title="Login or register"/>
             }
             case "progress": {
-                return <NavLink to={"/game/" + this.props.game.id}>
+                return <NavLink to={"/game/" + props.game.id}>
                     <IoGameControllerOutline title="Game started" />
                 </NavLink>
             }
@@ -70,7 +67,7 @@ class Game extends React.Component {
                 return <BiPauseCircle />
             }
             case "finished": {
-                return <NavLink to={"/game/" + this.props.game.id}>
+                return <NavLink to={"/game/" + props.game.id}>
                     <FaFlagCheckered title="Game finished" />
                 </NavLink>
             }
@@ -78,50 +75,87 @@ class Game extends React.Component {
 
     }
 
-    render() {
-        return <div>
-            <div className={style.game}>
-                <div className={style.details}
-                     onClick={this.viewDetails}>
-                    {!this.state.viewDetails
-                        ? <BsChevronCompactDown/>
-                        : <BsChevronCompactUp/>}
+    return <div>
+        <div className={style.game}>
+            {!editMode
+                ? <div className={style.topicArea}>
+                    <div className={style.topic}>
+                        <NavLink  to={"/game/" + props.game.id}>{topic}</NavLink>
+                        {props.game.kind_id && <Kind kindId={props.game.kind_id}/>}
+                    </div>
+                    <div className={style.gameInfo}>
+                        <NavLink to={"/profile/" + props.game.creator.id} style={{fontWeight: "bold"}}>
+                            {props.game.creator.name}
+                        </NavLink> created {<TimePassed createdTime={props.game.created_at}/>}
+                    </div>
                 </div>
-                {!this.state.editMode &&
-                <NavLink className={style.topic} to={"/game/" + this.props.game.id}>
-                    {this.state.topic}</NavLink>
-                }
-                {this.state.editMode &&
-                <input onChange={this.onTopicChange}
-                       autoFocus={true}
-                       onBlur={this.deActivateEditMode}
-                       value={this.state.topic}/>
-                }
-                <div className={style.rating}>
-                    <div className={style.scale}
-                         style={{width: `${this.props.game.score}%`}}/>
-                </div>
-                <div className={style.users} onClick={this.viewDetails}>
-                    <MdPeopleOutline size="1em"/> {this.props.game.users && this.props.game.users.length}
-                </div>
-                <div className={style.status}>
-                    {this.status()}
-                </div>
-            </div>
-            {
-                this.state.viewDetails
-                    ? <Details users={this.props.game.users}
-                               editable={this.props.game.editable}
-                               time={this.props.game.time}
-                               gameId={this.props.game.id}
-                               editMode={this.state.editMode}
-                               activateEditMode={this.activateEditMode}
-                               deActivateEditMode={this.deActivateEditMode}
-                               deleteCurrentGame={this.deleteCurrentGame} />
-                    : null
+
+                : <Formik
+                    initialValues={{topic: topic}}
+                    onSubmit={(values, { setSubmitting }) => {
+
+                        setTimeout(() => {
+                            props.updateGameTopic({gameId: props.game.id, topic: values.topic, kind_id: values.kind})
+                            changeEditorMode()
+                            changeStateViewDetails()
+                            setSubmitting(false);
+                        }, 400);
+                    }}
+                    onReset={() =>{
+                        changeEditorMode()
+                    }}>
+
+                    {({ isSubmitting }) => (
+                        <Form className={style.formBody}>
+                            <div className={style.inputs}>
+                                <Field type="input" name="topic" component="input" className={style.textArea}/>
+                            </div>
+
+                            <div>
+                                Kind: <Field as="select" name="kind" defaultValue={props.game.kind_id} className={style.selectList}>
+                                {props.kinds.map(item =>
+                                    <option key={item.id} value={item.id}>{item.name}</option>)}
+                            </Field>
+                                <span> <button type="submit" disabled={isSubmitting}>Save</button>
+                                <button type="reset">Cancel</button></span>
+                            </div>
+                            <ErrorMessage name="text" component="div" className={style.error}/>
+                        </Form>
+
+                    )}
+                </Formik>
             }
+
+            {score &&
+            <div className={style.rating}>
+                <div className={style.scaleGovernment}
+                     style={{height: `${score}%`}}/>
+                <div className={style.scaleOpposition}
+                     style={{height: `${100-score}%`}}/>
+            </div>
+            }
+
+            <div className={style.users} onClick={changeStateViewDetails}>
+                <MdPeopleOutline size="1em"/> {props.game.users_count}
+            </div>
+            <div className={style.status}>
+                {status()}
+            </div>
+
         </div>
-    }
+
+        {viewDetails
+            ? <DetailsContainer game={props.game}
+                                editMode={editMode}
+                                editorMode={changeEditorMode}
+                                deleteCurrentGame={deleteCurrentGame}
+                                changeStateViewDetails={changeStateViewDetails}/>
+            : <div className={style.details}>
+                <span className={style.bookmark} onClick={changeStateViewDetails}>View details</span>
+            </div>
+        }
+
+    </div>
 }
 
 export default Game

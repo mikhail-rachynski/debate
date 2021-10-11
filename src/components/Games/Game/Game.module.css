@@ -5,30 +5,57 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     display: grid;
     grid-template-areas:
-    "details topic rating users status";
-    grid-template-columns: auto 1fr auto auto auto;
-    grid-template-rows: 48px;
+    "topicArea rating users status";
+    grid-template-columns: 1fr auto auto auto auto;
+    grid-template-rows: auto;
     align-items: center;
     position: relative;
     z-index: 50;
+    padding: 10px;
 }
 .game a {
     color: black;
     text-decoration: none;
 }
-.details {
-    grid-area: details;
-    cursor: pointer;
+
+.topicArea {
+    grid-area: topicArea;
+    display: grid;
+    grid-template-areas:
+            "topic"
+            "gameInfo";
+    margin: 5px;
 }
 .topic {
     grid-area: topic;
     cursor: pointer;
+    font-size: 18px;
+    padding: 5px;
+    font-weight: bold;
+}
+.selectList, .inputs input{
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: #dddddd 1px solid;
+    font-size: x-large;
+}
+.selectList {
+    font-size: larger;
+    border-radius: 5px;
+}
 
+.gameInfo {
+    grid-area: gameInfo;
+    font-size: 13px;
+    padding: 10px;
+    color: #64a0a0;
+    border-radius: 4px;
 }
 .option {
-     grid-area: option;
-     z-index: 51;
- }
+    grid-area: option;
+    z-index: 51;
+}
 .users {
     grid-area: users;
     align-content: center;
@@ -41,19 +68,45 @@
 }
 .rating {
     grid-area: rating;
-    border: darkslategray solid 1px;
-    height: 8px;
-    width: 70px;
+    position: relative;
+    height: 30px;
+    width: 20px;
 }
-.rating .scale {
-    background-color: darkslategray;
-    height: 8px;
+.rating .scaleGovernment, .scaleOpposition  {
+    width: 10px;
+    display: inline;
+    float: left;
 }
-.details, .topic, .users, .status, .option, .rating {
+.rating .scaleGovernment {
+    background-color: #64a0a0;
+}
+.rating .scaleOpposition {
+    background-color: #a06464;
+}
+.users, .status, .option, .rating {
     margin-left: 10px;
     margin-right: 10px;
     cursor: pointer;
 }
-.details, .users, .status, .option, .rating {
+.users, .status, .option, .rating {
     text-align: center;
+}
+.details {
+    display: grid;
+    justify-items: right;
+    padding: 3px;
+}
+.bookmark {
+    text-align: center;
+    font-size: small;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    padding: 5px;
+    background-color: dimgrey;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2);
+    cursor: pointer;
+    margin: -14px 10px 12px;
 }
