@@ -1,38 +1,76 @@
+.newGame {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 10px;
+    margin: 10px;
+}
+.title {
+    font-size: xx-large;
+    font-weight: bold;
+    text-align: center;
+}
+
 .formBody {
     display: grid;
     grid-template-areas:
-    ". form form ."
-    ". form form .";
+    "inputs"
+    "kinds"
+    "buttons"
+    "error";
     grid-gap: 10px;
-    grid-auto-rows: 200px;
-    grid-template-columns: repeat(4, 1fr);
-}
-
-.form {
-    grid-area: form;
-    align-self: center;
-    justify-self: center;
-    background-color: #f1f1f1;;
+    grid-template-columns: minmax(0,360px);
     padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-}
-.form h1 {
-    text-align: center;
-    margin: 0;
-    margin-bottom: 10px;
-}
-.input {
-    grid-area: input;
 }
 
-.input input{
+.inputs {
+    grid-area: inputs;
+    justify-self: center;
+    align-items: center;
+}
+
+.inputs input{
     margin: 10px;
     padding: 5px;
+    width: 80%;
     border-radius: 5px;
     border: #dddddd 1px solid;
+    font-size: x-large;
 }
-
-.input button {
+.kinds {
+    grid-area: kinds;
+    text-align: center;
+}
+.kindButton, .addKind {
+    text-decoration: none;
+    display: inline-table;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.addKind {
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    background-color: dodgerblue;
+    padding: 5px;
+    border-radius: 5px;
+}
+.newKindForm {
+    border-radius: 10px;
+    background-color: dodgerblue;
+    padding: 10px;
+}
+.newKindForm button {
+    margin: 5px;
+}
+.buttons {
+    grid-area: buttons;
+    justify-self: center;
+}
+.buttons button {
     margin: 10px;
+}
+.error {
+    grid-area: error;
+    color: red;
 }

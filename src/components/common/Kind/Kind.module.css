@@ -1,0 +1,20 @@
+.kind, .kindActive {
+    margin: 3px;
+    color: dimgray;
+    font-weight: bold;
+    font-size: 13px;
+    background-color: #dddddd;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.kind:hover {
+    color: white;
+    cursor: pointer;
+    background-color: darkorange;
+}
+.kindActive {
+    color: white;
+    cursor: default;
+    background-color: dodgerblue;
+}

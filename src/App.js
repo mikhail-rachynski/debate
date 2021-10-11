@@ -27,15 +27,13 @@ class App extends React.Component {
                 <div className="header">
                     <HeaderContainer />
                 </div>
-
                 <div className="content">{this.props.isFetching && <Preloader/>}
                     <Route exact path='/' render={() => <GamesContainer /> } />
                     <Route path='/game/:id' render={withSuspense(GameBoardContainer)} />
+                    <Route path='/kind/:id' render={() => <GamesContainer />} />
                     <Route path='/login' render={() => <Login /> } />
                     <Route path='/signup' render={() => <SignUp /> } />
                 </div>
-
-
             </div>
         );
     }

@@ -1,42 +1,79 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {connect} from "react-redux";
 import {
-    addPlayer,
-    deleteGame,
-    exitPlayerFromGame,
-    getAllGames,
-    updateGameTopic,
+    getGames, getKinds,
     webSocketGames
 } from "../../redux/games-reducer";
-import Games from "./Games";
+import style from "./Games.module.css";
+import GameMenu from "./GameMenu/GameMenu";
+import GameContainer from "./Game/GameContainer";
+import Kind from "../common/Kind/Kind";
+import {withRouter, NavLink} from "react-router-dom";
+import {compose} from "redux";
+import {MdFiberNew} from "react-icons/md";
+import NewGame from "./GameMenu/NewGame/NewGame";
 
-class GamesContainer extends React.Component{
-    componentDidMount() {
-        this.props.getAllGames()
-        this.props.webSocketGames(true)
-    }
-    componentWillUnmount() {
-        this.props.webSocketGames(false)
+const GamesContainer = ({getGames, webSocketGames, games,
+                            isAuth, kinds, getKinds, currentKind, match, isFetching}) => {
+    const [page, setPage] = useState(match.params.id)
+
+    useEffect(() => {
+        getKinds()
+        webSocketGames(true)
+        return () => webSocketGames(false)
+    }, [])
+
+    useEffect(() => {
+        setPage(match.params.id)
+    }, [match.params.id])
+
+    useEffect(() => {
+        getGames(page)
+    }, [page])
+
+    const [newGamePopUp, setNewGamePopUp] = useState(false)
+
+    const changePopUp = () => {
+        newGamePopUp ? setNewGamePopUp(false) : setNewGamePopUp(true)
     }
 
-    render() {
-        return <Games {...this.props}/>
-    }
+    return <div className={style.games}>
+        <div className={style.menu}>
+            <GameMenu isAuth={isAuth} kinds={kinds} gamesLength={games.length} changePopUp={changePopUp}/>
+        </div>
+        <div className={style.kinds}>
+            <NavLink to={"/"}>
+                <Kind name={"ALL"} active={currentKind === 0} kindId={0}/>
+            </NavLink>
+            {kinds.map(kind => <NavLink to={"/kind/"+kind.id} key={kind.id}>
+                <Kind active={currentKind === kind.id} kindId={kind.id}/>
+            </NavLink>)}
+        </div>
+        <div className={style.games}>
+            {games.length === 0 && !isFetching ?
+                <div className={style.newGame}>
+                    <div className={style.newGameButton} onClick={changePopUp}>
+                        <div><MdFiberNew size={"7em"}/></div>
+                        <div>Create new game</div>
+                    </div>
+                </div>
+                : games.map((game) =>
+                <GameContainer key={game.id} game={game} kinds={kinds}/>
+                )}
+        </div>
+        {newGamePopUp && <NewGame changePopUp={changePopUp} kinds={kinds}/>}
+    </div>
 }
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
     return {
-        games: state.games.allGames,
-        currentUserId: state.auth.currentUserId,
-        isAuth: state.auth.isAuth
+        currentKind: state.games.currentKind,
+        games: state.games.games,
+        isAuth: state.auth.isAuth,
+        kinds: state.games.kinds,
+        isFetching: state.app.isFetching
     }
 }
 
-export default connect(mapStateToProps, {
-    getAllGames,
-    addPlayer,
-    exitPlayerFromGame,
-    deleteGame,
-    updateGameTopic,
-    webSocketGames
-})(GamesContainer)
+export default compose(connect(mapStateToProps,
+    {getGames: getGames, webSocketGames, getKinds}), withRouter)(GamesContainer)
