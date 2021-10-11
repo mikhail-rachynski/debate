@@ -1,0 +1,29 @@
+.dialogLine {
+    position: sticky;
+    bottom: 10px;
+    width: 100%;
+    height: 60px;
+    background-color: #a06464;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialogLine button {
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    position: relative;
+    background-color: darkorange;
+    border: none;
+    cursor: pointer;
+}
+.dialogLine button, p {
+    color: white;
+    padding: 10px;
+    margin: 3px;
+}
+.dialogLine button:disabled {
+    background-color: #f5b36c;
+    color: #dddddd;
+}
