@@ -48,6 +48,7 @@ export const login = (formData) => {
                 localStorage.setItem("token", data.token)
                 dispatch(setUserData(data.current_user.id, data.current_user.name))
                 dispatch(toggleIsFetching(false))
+                window.location.reload()
             })
     }
 }
@@ -59,6 +60,7 @@ export const signUp = (formData) => {
                 localStorage.setItem("token", data.token)
                 dispatch(setUserData(data.current_user.id, data.current_user.name))
                 dispatch(toggleIsFetching(false))
+                window.location.reload()
             })
     }
 }
